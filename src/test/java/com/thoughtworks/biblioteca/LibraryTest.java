@@ -25,4 +25,9 @@ public class LibraryTest {
 
         verify(book1).bookOutput();
     }
+
+    @Test
+    public void shouldRemoveBookFromListWhenCheckedOut(){
+
+    }
 }

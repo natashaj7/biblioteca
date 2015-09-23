@@ -23,4 +23,8 @@ public class Library {
         }
         printStream.println(bookList);
     }
+
+    public void checkOut() {
+
+    }
 }
