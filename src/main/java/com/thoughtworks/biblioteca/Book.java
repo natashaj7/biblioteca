@@ -15,7 +15,7 @@ public class Book {
         this.yearPublished = yearPublished;
     }
 
-    public String toString(){
-        return name+" "+author+" "+yearPublished;
+    public String bookOutput(){
+        return name+" | "+author+" | "+yearPublished;
     }
 }

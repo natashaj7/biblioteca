@@ -1,9 +1,10 @@
 package com.thoughtworks.biblioteca;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         ArrayList<Book> libraryBooks = new ArrayList<>();
 
@@ -14,9 +15,10 @@ public class Main {
         libraryBooks.add(book2);
         libraryBooks.add(book3);
 
-        Library library = new Library(libraryBooks);
+        Library library = new Library(libraryBooks, System.out);
+        MainMenu mainMenu = new MainMenu(System.out);
 
-        Application app = new Application(System.out, library);
+        Application app = new Application(System.out, library, mainMenu);
         app.start();
     }
 }

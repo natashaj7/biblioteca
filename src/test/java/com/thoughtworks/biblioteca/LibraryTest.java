@@ -15,22 +15,14 @@ import static org.mockito.Mockito.verify;
 public class LibraryTest {
 
     @Test
-    public void shouldReturnOneBookDetailsWhenLibraryContainsSingleBook(){
+    public void shouldCallToStringFromBookClass(){
         PrintStream printStream = mock(PrintStream.class);
         Book book1 = mock(Book.class);
         ArrayList<Book> mockBooks = new ArrayList<>();
         mockBooks.add(book1);
-        Library library = new Library(mockBooks);
-        library.showBooks(printStream);
+        Library library = new Library(mockBooks, printStream);
+        library.showBooks();
 
-        verify(printStream).println(book1);
+        verify(book1).bookOutput();
     }
-
-//    @Test
-//    public void whenAppStartsShouldListTwoBooksWhenLibraryContainsTwoBooks(){
-//        app.start();
-//        verify(printStream).println("Welcome!");
-//        verify(printStream).println("Book1");
-//        verify(printStream).println("Programmers Guide to Programming");
-//    }
 }

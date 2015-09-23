@@ -4,6 +4,7 @@ package com.thoughtworks.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.mockito.Mockito.mock;
@@ -17,23 +18,28 @@ public class ApplicationTest {
     PrintStream printStream;
     Application app;
     Library library;
+    MainMenu mainMenu;
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
         library = mock(Library.class);
-        app = new Application(printStream, library);
+        mainMenu = mock(MainMenu.class);
+        app = new Application(printStream, library, mainMenu);
+
     }
 
     @Test
-    public void shouldOutputWelcome(){
+    public void shouldOutputWelcome() throws IOException {
         app.start();
         verify(printStream).println("Welcome!");
     }
 
     @Test
-    public void whenAppStartsShowBooksIsCalled(){
+    public void whenAppStartsShowBooksIsCalled() throws IOException {
         app.start();
-        verify(library).showBooks(printStream);
+        verify(library).showBooks();
     }
+
+
 }
