@@ -24,7 +24,7 @@ public class Library {
         printStream.println(bookList);
     }
 
-    public void checkOut() {
+    public void checkOut(String bookTitle) {
 
     }
 }

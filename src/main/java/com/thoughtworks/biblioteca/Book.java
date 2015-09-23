@@ -18,4 +18,8 @@ public class Book {
     public String bookOutput(){
         return name+" | "+author+" | "+yearPublished;
     }
+
+    public boolean hasTitle(String title) {
+        return false;
+    }
 }

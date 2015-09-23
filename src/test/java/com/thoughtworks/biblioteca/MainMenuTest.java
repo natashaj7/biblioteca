@@ -1,11 +1,8 @@
 package com.thoughtworks.biblioteca;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -71,9 +68,9 @@ public class MainMenuTest {
 
     @Test
     public void shouldCheckOutWhenUserInputsTwo(){
-        when(reader.readLine()).thenReturn("2", "Quit");
+        when(reader.readLine()).thenReturn("2", "bookTitle", "Quit");
         mainMenu.selectOption();
-        verify(library).checkOut();
+        verify(library).checkOut("bookTitle");
 
     }
 }

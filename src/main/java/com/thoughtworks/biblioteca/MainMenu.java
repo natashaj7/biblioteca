@@ -1,8 +1,5 @@
 package com.thoughtworks.biblioteca;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 /**
@@ -33,7 +30,8 @@ public class MainMenu {
                 library.showBooks();
             }
             else if(option.equals("2")){
-                library.checkOut();
+                String bookTitle = reader.readLine();
+                library.checkOut(bookTitle);
             }
             else if(!option.equals("Quit")) {
                 printStream.println("Select Valid Option!");
