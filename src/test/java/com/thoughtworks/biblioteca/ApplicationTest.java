@@ -25,7 +25,7 @@ public class ApplicationTest {
         printStream = mock(PrintStream.class);
         library = mock(Library.class);
         mainMenu = mock(MainMenu.class);
-        app = new Application(printStream, library, mainMenu);
+        app = new Application(printStream, mainMenu);
 
     }
 
@@ -36,10 +36,9 @@ public class ApplicationTest {
     }
 
     @Test
-    public void whenAppStartsShowBooksIsCalled() throws IOException {
+    public void shouldSelectOptionWhenAppStarting() {
         app.start();
-        verify(library).showBooks();
+
+        verify(mainMenu).selectOption();
     }
-
-
 }

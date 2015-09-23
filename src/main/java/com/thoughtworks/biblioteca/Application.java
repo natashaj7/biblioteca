@@ -12,23 +12,15 @@ import java.util.ArrayList;
 public class Application {
 
     private PrintStream printStream;
-    private Library library;
     private MainMenu mainMenu;
 
-    public Application(PrintStream printStream, Library library, MainMenu mainMenu) {
+    public Application(PrintStream printStream, MainMenu mainMenu) {
         this.printStream = printStream;
-        this.library = library;
         this.mainMenu = mainMenu;
     }
 
-    public void start() throws IOException {
+    public void start() {
         printStream.println("Welcome!");
-        library.showBooks();
-    }
-
-    private void runMainMenu() throws IOException {
-        mainMenu.display();
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String input = br.readLine();
+        mainMenu.selectOption();
     }
 }

@@ -1,6 +1,8 @@
 package com.thoughtworks.biblioteca;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Main {
@@ -16,9 +18,9 @@ public class Main {
         libraryBooks.add(book3);
 
         Library library = new Library(libraryBooks, System.out);
-        MainMenu mainMenu = new MainMenu(System.out);
+        MainMenu mainMenu = new MainMenu(System.out, library, new BufferedReader(new InputStreamReader(System.in)));
 
-        Application app = new Application(System.out, library, mainMenu);
+        Application app = new Application(System.out, mainMenu);
         app.start();
     }
 }
