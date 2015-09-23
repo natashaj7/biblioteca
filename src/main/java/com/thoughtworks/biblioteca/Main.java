@@ -18,7 +18,7 @@ public class Main {
         libraryBooks.add(book3);
 
         Library library = new Library(libraryBooks, System.out);
-        MainMenu mainMenu = new MainMenu(System.out, library, new BufferedReader(new InputStreamReader(System.in)));
+        MainMenu mainMenu = new MainMenu(System.out, library, new UserBufferedReader(new BufferedReader(new InputStreamReader(System.in))));
 
         Application app = new Application(System.out, mainMenu);
         app.start();
