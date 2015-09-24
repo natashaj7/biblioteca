@@ -20,6 +20,6 @@ public class Book {
     }
 
     public boolean hasTitle(String title) {
-        return false;
+        return this.name.equals(title);
     }
 }

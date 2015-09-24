@@ -25,6 +25,16 @@ public class Library {
     }
 
     public void checkOut(String bookTitle) {
+        for(Book book: books){
+            if (book.hasTitle(bookTitle)){
+                books.remove(book);
+                break;
+            }
+        }
 
+    }
+
+    public boolean contains(Book book1) {
+        return books.contains(book1);
     }
 }

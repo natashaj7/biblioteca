@@ -41,12 +41,17 @@ public class LibraryTest {
     }
 
     @Test
+    public void shouldReturnTrueWhenTheLibraryContainsTheBook() {
+        assertThat(library.contains(book1), is(true));
+    }
+
+    @Test
     public void shouldRemoveBookFromListWhenCheckedOut(){
         when(book1.hasTitle("book title")).thenReturn(true);
 
         library.checkOut("book title");
 
-        assertThat(books.contains(book1), is(false));
+        assertThat(library.contains(book1), is(false));
     }
 
 
