@@ -62,4 +62,13 @@ public class LibraryTest {
 
         verify(printStream).println("Thank You! Enjoy the book.");
     }
+
+    @Test
+    public void shouldGiveErrorCheckoutMessageIfBookIsNotAvailable(){
+        when(book1.hasTitle("book title")).thenReturn(false);
+
+        library.checkOut("book title");
+
+        verify(printStream).println("That book is not available.");
+    }
 }

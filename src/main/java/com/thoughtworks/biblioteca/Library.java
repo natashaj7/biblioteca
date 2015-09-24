@@ -1,6 +1,7 @@
 package com.thoughtworks.biblioteca;
 
 import java.io.PrintStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -25,13 +26,22 @@ public class Library {
     }
 
     public void checkOut(String bookTitle) {
+        boolean bookExists = false;
         for(Book book: books){
             if (book.hasTitle(bookTitle)){
+                bookExists = true;
                 books.remove(book);
                 printStream.println("Thank You! Enjoy the book.");
                 break;
+                //CollectionUtils.find(books, hasTitle(""));
+
             }
         }
+
+        if(!bookExists){
+            printStream.println("That book is not available.");
+        }
+
 
     }
 
