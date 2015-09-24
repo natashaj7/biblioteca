@@ -28,6 +28,7 @@ public class Library {
         for(Book book: books){
             if (book.hasTitle(bookTitle)){
                 books.remove(book);
+                printStream.println("Thank You! Enjoy the book.");
                 break;
             }
         }

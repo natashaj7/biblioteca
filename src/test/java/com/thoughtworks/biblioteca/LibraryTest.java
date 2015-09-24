@@ -54,5 +54,12 @@ public class LibraryTest {
         assertThat(library.contains(book1), is(false));
     }
 
+    @Test
+    public void shouldGiveSuccessfulCheckoutMessageIfBookIsCheckedOut(){
+        when(book1.hasTitle("book title")).thenReturn(true);
 
+        library.checkOut("book title");
+
+        verify(printStream).println("Thank You! Enjoy the book.");
+    }
 }
