@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Matchers.contains;
@@ -22,6 +24,7 @@ public class MainMenuTest {
     private PrintStream printStream;
     private Library library;
     private UserBufferedReader reader;
+    private HashMap<String, Command> commandMap;
 
 
     @Before
@@ -29,7 +32,8 @@ public class MainMenuTest {
         printStream = mock(PrintStream.class);
         library = mock(Library.class);
         reader = mock(UserBufferedReader.class);
-        mainMenu = new MainMenu(printStream, library, reader);
+        commandMap = mock(HashMap.class);
+        mainMenu = new MainMenu(printStream, library, reader, commandMap);
 
     }
 
@@ -42,11 +46,13 @@ public class MainMenuTest {
 
     @Test
     public void shouldListBooksWhenUserEntersOne(){
+       // when(commandMap.containsKey("1")).thenReturn(true);
+
         when(reader.readLine()).thenReturn(LIST_BOOKS, QUIT);
 
         mainMenu.selectOption();
 
-        verify(library).showBooks();
+        verify(commandMap).get("1").execute();
     }
 
     @Test
@@ -73,7 +79,7 @@ public class MainMenuTest {
     public void shouldCheckOutWhenUserInputsTwo(){
         when(reader.readLine()).thenReturn(CHECKOUT, "bookTitle", QUIT);
         mainMenu.selectOption();
-        verify(library).checkOut("bookTitle");
+        verify(commandMap).get("2").execute();
 
     }
 

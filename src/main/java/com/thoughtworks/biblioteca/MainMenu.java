@@ -1,17 +1,22 @@
 package com.thoughtworks.biblioteca;
 
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainMenu {
 
     private PrintStream printStream;
     private Library library;
     private UserBufferedReader reader;
+    private Map<String, Command> commandMap;
 
-    public MainMenu(PrintStream printStream, Library library, UserBufferedReader reader) {
+    public MainMenu(PrintStream printStream, Library library, UserBufferedReader reader, HashMap<String, Command> commandMap) {
         this.printStream = printStream;
         this.library = library;
         this.reader = reader;
+        this.commandMap = commandMap;
+
     }
 
     public void selectOption() {
@@ -20,26 +25,22 @@ public class MainMenu {
                             "\n2 - Checkout" +
                             "\n3 - Return Book");
         String option="";
-
+        option = reader.readLine();
         while(!option.equals("Quit")){
-            option = reader.readLine();
 
-            if (option.equals("1")) {
-                library.showBooks();
-            }
-            else if(option.equals("2")){
-                String bookTitle = reader.readLine();
-                library.checkOut(bookTitle);
-            }
-            else if(option.equals("3")){
+            if(option.equals("3")){
                 String bookTitle = reader.readLine();
                 library.returnBook(bookTitle);
 
             }
-            else if(!option.equals("Quit")) {
+            else if(commandMap.containsKey(option)){
+                commandMap.get(option).execute();
+            }
+            else  {
                 printStream.println("Select Valid Option!");
             }
 
+            option = reader.readLine();
         }
 
         printStream.println("Done!");
