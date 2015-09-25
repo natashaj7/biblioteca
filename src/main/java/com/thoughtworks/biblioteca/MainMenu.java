@@ -33,6 +33,10 @@ public class MainMenu {
                 String bookTitle = reader.readLine();
                 library.checkOut(bookTitle);
             }
+            else if(option.equals("3")){
+
+
+            }
             else if(!option.equals("Quit")) {
                 printStream.println("Select Valid Option!");
             }

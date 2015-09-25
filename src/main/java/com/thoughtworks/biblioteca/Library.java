@@ -48,4 +48,7 @@ public class Library {
     public boolean contains(Book book1) {
         return books.contains(book1);
     }
+
+    public void returnBook(String title, String author, String year) {
+    }
 }

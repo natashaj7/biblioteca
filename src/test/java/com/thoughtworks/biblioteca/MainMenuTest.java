@@ -15,10 +15,16 @@ import static org.mockito.Mockito.when;
  */
 public class MainMenuTest {
 
+    private final String QUIT = "Quit";
+    private final String INVALID_OPTION = "0";
+    private final String LIST_BOOKS = "1";
+    private final String CHECKOUT = "2";
+    private final String RETURN = "3";
     private MainMenu mainMenu;
     private PrintStream printStream;
     private Library library;
     private UserBufferedReader reader;
+
 
     @Before
     public void setUp() {
@@ -26,11 +32,12 @@ public class MainMenuTest {
         library = mock(Library.class);
         reader = mock(UserBufferedReader.class);
         mainMenu = new MainMenu(printStream, library, reader);
+
     }
 
     @Test
     public void shouldDisplayMenuOptionsWhenSelectingOption(){
-        when(reader.readLine()).thenReturn("", "Quit");
+        when(reader.readLine()).thenReturn("", QUIT);
         mainMenu.selectOption();
         verify(printStream).println("Please choose an option from below or type \"Quit\"" +
                 "\n1 - List Books" +
@@ -39,7 +46,7 @@ public class MainMenuTest {
 
     @Test
     public void shouldListBooksWhenUserEntersOne(){
-        when(reader.readLine()).thenReturn("1", "Quit");
+        when(reader.readLine()).thenReturn(LIST_BOOKS, QUIT);
 
         mainMenu.selectOption();
 
@@ -48,7 +55,7 @@ public class MainMenuTest {
 
     @Test
     public void shouldDisplaySelectValidOptionWhenOptionIsNotOne(){
-        when(reader.readLine()).thenReturn("0", "Quit");
+        when(reader.readLine()).thenReturn(INVALID_OPTION, QUIT);
 
         mainMenu.selectOption();
 
@@ -58,7 +65,7 @@ public class MainMenuTest {
 
     @Test
     public void shouldQuitWhenUserInputsQ(){
-        when(reader.readLine()).thenReturn("0", "1", "Quit");
+        when(reader.readLine()).thenReturn(INVALID_OPTION, LIST_BOOKS, QUIT);
 
         mainMenu.selectOption();
 
@@ -68,9 +75,18 @@ public class MainMenuTest {
 
     @Test
     public void shouldCheckOutWhenUserInputsTwo(){
-        when(reader.readLine()).thenReturn("2", "bookTitle", "Quit");
+        when(reader.readLine()).thenReturn(CHECKOUT, "bookTitle", QUIT);
         mainMenu.selectOption();
         verify(library).checkOut("bookTitle");
 
+    }
+
+    @Test
+    public void shouldReturnBookWhenUserInputsThree(){
+        when(reader.readLine()).thenReturn(RETURN, "title", "author", "1993", QUIT);
+
+        mainMenu.selectOption();
+
+        verify(library).returnBook("title", "author", "1993");
     }
 }
