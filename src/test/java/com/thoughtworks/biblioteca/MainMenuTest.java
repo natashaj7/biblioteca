@@ -6,13 +6,11 @@ import org.junit.Test;
 import java.io.PrintStream;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by lsantano on 9/23/15.
- */
 public class MainMenuTest {
 
     private final String QUIT = "Quit";
@@ -39,9 +37,7 @@ public class MainMenuTest {
     public void shouldDisplayMenuOptionsWhenSelectingOption(){
         when(reader.readLine()).thenReturn("", QUIT);
         mainMenu.selectOption();
-        verify(printStream).println("Please choose an option from below or type \"Quit\"" +
-                "\n1 - List Books" +
-                "\n2 - Checkout");
+        verify(printStream).println(contains("Please choose an option"));
     }
 
     @Test
@@ -83,10 +79,10 @@ public class MainMenuTest {
 
     @Test
     public void shouldReturnBookWhenUserInputsThree(){
-        when(reader.readLine()).thenReturn(RETURN, "title", "author", "1993", QUIT);
+        when(reader.readLine()).thenReturn(RETURN, "title", QUIT);
 
         mainMenu.selectOption();
 
-        verify(library).returnBook("title", "author", "1993");
+        verify(library).returnBook("title");
     }
 }

@@ -1,15 +1,12 @@
 package com.thoughtworks.biblioteca;
 
-/**
- * Created by lsantano on 9/22/15.
- */
 public class Book {
 
     private String name;
     private String author;
-    private Integer yearPublished;
+    private String yearPublished;
 
-    public Book(String name, String author, Integer yearPublished){
+    public Book(String name, String author, String yearPublished){
         this.name = name;
         this.author = author;
         this.yearPublished = yearPublished;

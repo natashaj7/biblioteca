@@ -2,9 +2,6 @@ package com.thoughtworks.biblioteca;
 
 import java.io.PrintStream;
 
-/**
- * Created by lsantano on 9/23/15.
- */
 public class MainMenu {
 
     private PrintStream printStream;
@@ -20,7 +17,8 @@ public class MainMenu {
     public void selectOption() {
         printStream.println("Please choose an option from below or type \"Quit\""+
                             "\n1 - List Books" +
-                            "\n2 - Checkout");
+                            "\n2 - Checkout" +
+                            "\n3 - Return Book");
         String option="";
 
         while(!option.equals("Quit")){
@@ -34,7 +32,8 @@ public class MainMenu {
                 library.checkOut(bookTitle);
             }
             else if(option.equals("3")){
-
+                String bookTitle = reader.readLine();
+                library.returnBook(bookTitle);
 
             }
             else if(!option.equals("Quit")) {

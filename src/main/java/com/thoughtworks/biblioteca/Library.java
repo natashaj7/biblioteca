@@ -1,25 +1,23 @@
 package com.thoughtworks.biblioteca;
 
 import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-/**
- * Created by lsantano on 9/22/15.
- */
 public class Library {
 
-    private ArrayList<Book> books;
+    private ArrayList<Book> availableBooks;
+    private ArrayList<Book> checkedOutBooks;
     private PrintStream printStream;
 
-    public Library(ArrayList<Book> books, PrintStream printStream){
-        this.books = books;
+    public Library(ArrayList<Book> availableBooks, ArrayList<Book> checkedOutBooks, PrintStream printStream){
+        this.availableBooks = availableBooks;
+        this.checkedOutBooks=checkedOutBooks;
         this.printStream = printStream;
     }
 
     public void showBooks() {
         String bookList = "";
-        for(Book item:books){
+        for(Book item: availableBooks){
             bookList+=(item.bookOutput() + "\n");
         }
         printStream.println(bookList);
@@ -27,14 +25,13 @@ public class Library {
 
     public void checkOut(String bookTitle) {
         boolean bookExists = false;
-        for(Book book: books){
+        for(Book book: availableBooks){
             if (book.hasTitle(bookTitle)){
                 bookExists = true;
-                books.remove(book);
+                availableBooks.remove(book);
+                checkedOutBooks.add(book);
                 printStream.println("Thank You! Enjoy the book.");
                 break;
-                //CollectionUtils.find(books, hasTitle(""));
-
             }
         }
 
@@ -42,13 +39,22 @@ public class Library {
             printStream.println("That book is not available.");
         }
 
-
     }
 
-    public boolean contains(Book book1) {
-        return books.contains(book1);
-    }
+    public void returnBook(String title) {
+        boolean bookExists = false;
+        for(Book book: checkedOutBooks){
+            if (book.hasTitle(title)){
+                bookExists = true;
+                checkedOutBooks.remove(book);
+                availableBooks.add(book);
+                printStream.println("Thank You! Book has been returned.");
+                break;
+            }
+        }
 
-    public void returnBook(String title, String author, String year) {
+        if(!bookExists){
+            printStream.println("That book does not belong to this library.");
+        }
     }
 }
