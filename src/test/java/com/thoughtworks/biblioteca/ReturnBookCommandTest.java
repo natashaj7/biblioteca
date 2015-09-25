@@ -11,25 +11,24 @@ import static org.mockito.Mockito.when;
 /**
  * Created by njimenez on 9/25/15.
  */
-public class CheckoutCommandTest {
+public class ReturnBookCommandTest {
     private Library library;
     private UserBufferedReader reader;
-    private CheckoutCommand checkoutCommand;
+    private ReturnBookCommand returnBookCommand;
 
     @Before
     public void setUp(){
         library = mock(Library.class);
         reader = mock(UserBufferedReader.class);
-        checkoutCommand = new CheckoutCommand(library, reader);
+        returnBookCommand = new ReturnBookCommand(library, reader);
 
     }
 
     @Test
-    public void shouldListBooksWhenUserEntersOne(){
+    public void shouldReturnBookWhenUserEntersThree(){
         when(reader.readLine()).thenReturn("book title");
-        checkoutCommand.execute();
-        verify(library).checkOut("book title");
+        returnBookCommand.execute();
+        verify(library).returnBook("book title");
     }
-
 
 }

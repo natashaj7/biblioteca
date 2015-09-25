@@ -100,4 +100,24 @@ public class LibraryTest {
 
         assertThat(checkedOutBooks.contains(book2), is(false));
     }
+
+
+
+    @Test
+    public void shouldGiveSuccessfulReturnMessageIfBookIsReturned(){
+        when(book2.hasTitle("book title")).thenReturn(true);
+
+        library.returnBook("book title");
+
+        verify(printStream).println("Thank you for returning the book.");
+    }
+
+    @Test
+    public void shouldGiveErrorReturnMessageIfBookDoesNotBelongInLibrary(){
+        when(book1.hasTitle("book title")).thenReturn(false);
+
+        library.returnBook("book title");
+
+        verify(printStream).println("That is not a valid book to return.");
+    }
 }

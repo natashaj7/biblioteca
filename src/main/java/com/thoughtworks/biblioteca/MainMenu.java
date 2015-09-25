@@ -24,28 +24,18 @@ public class MainMenu {
                             "\n1 - List Books" +
                             "\n2 - Checkout" +
                             "\n3 - Return Book");
-        String option="";
-        option = reader.readLine();
+        String option= reader.readLine();
         while(!option.equals("Quit")){
-
-            if(option.equals("3")){
-                String bookTitle = reader.readLine();
-                library.returnBook(bookTitle);
-
-            }
-            else if(commandMap.containsKey(option)){
+            if(commandMap.containsKey(option)){
                 commandMap.get(option).execute();
             }
             else  {
                 printStream.println("Select Valid Option!");
             }
-
             option = reader.readLine();
         }
 
         printStream.println("Done!");
-
-
 
     }
 

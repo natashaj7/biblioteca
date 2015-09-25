@@ -25,6 +25,7 @@ public class Main {
         HashMap<String, Command> commandMap = new HashMap<>();
         commandMap.put("1", new ListBooksCommand(library));
         commandMap.put("2", new CheckoutCommand(library, bufferedReader));
+        commandMap.put("3", new ReturnBookCommand(library, bufferedReader));
         MainMenu mainMenu = new MainMenu(System.out, library, bufferedReader, commandMap);
         Application app = new Application(System.out, mainMenu);
         app.start();

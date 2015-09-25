@@ -25,6 +25,9 @@ public class MainMenuTest {
     private Library library;
     private UserBufferedReader reader;
     private HashMap<String, Command> commandMap;
+    private ListBooksCommand listBooksCommand;
+    private CheckoutCommand checkoutCommand;
+    private ReturnBookCommand returnBookCommand;
 
 
     @Before
@@ -32,7 +35,14 @@ public class MainMenuTest {
         printStream = mock(PrintStream.class);
         library = mock(Library.class);
         reader = mock(UserBufferedReader.class);
-        commandMap = mock(HashMap.class);
+        listBooksCommand = mock(ListBooksCommand.class);
+        checkoutCommand = mock(CheckoutCommand.class);
+        returnBookCommand = mock(ReturnBookCommand.class);
+        commandMap = new HashMap<>();
+        commandMap.put("1", listBooksCommand);
+        commandMap.put("2", checkoutCommand);
+        commandMap.put("3", returnBookCommand);
+
         mainMenu = new MainMenu(printStream, library, reader, commandMap);
 
     }
@@ -46,13 +56,9 @@ public class MainMenuTest {
 
     @Test
     public void shouldListBooksWhenUserEntersOne(){
-       // when(commandMap.containsKey("1")).thenReturn(true);
-
         when(reader.readLine()).thenReturn(LIST_BOOKS, QUIT);
-
         mainMenu.selectOption();
-
-        verify(commandMap).get("1").execute();
+        verify(commandMap.get("1")).execute();
     }
 
     @Test
@@ -79,8 +85,7 @@ public class MainMenuTest {
     public void shouldCheckOutWhenUserInputsTwo(){
         when(reader.readLine()).thenReturn(CHECKOUT, "bookTitle", QUIT);
         mainMenu.selectOption();
-        verify(commandMap).get("2").execute();
-
+        verify(commandMap.get("2")).execute();
     }
 
     @Test
@@ -89,6 +94,6 @@ public class MainMenuTest {
 
         mainMenu.selectOption();
 
-        verify(library).returnBook("title");
+        verify(commandMap.get("3")).execute();
     }
 }

@@ -48,13 +48,13 @@ public class Library {
                 bookExists = true;
                 checkedOutBooks.remove(book);
                 availableBooks.add(book);
-                printStream.println("Thank You! Book has been returned.");
+                printStream.println("Thank you for returning the book.");
                 break;
             }
         }
 
         if(!bookExists){
-            printStream.println("That book does not belong to this library.");
+            printStream.println("That is not a valid book to return.");
         }
     }
 }
