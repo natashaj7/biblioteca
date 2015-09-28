@@ -20,8 +20,12 @@ public class Main {
         availableBooks.add(book3);
         checkedOutBooks.add(book4);
 
+        ArrayList<Movie> availableMovies = new ArrayList<>();
+        Movie movie1 = new Movie("The Revenge of the Programmers", "2015", "Perla", "10");
+        availableMovies.add(movie1);
+
         UserBufferedReader bufferedReader = new UserBufferedReader(new BufferedReader(new InputStreamReader(System.in)));
-        Library library = new Library(availableBooks, checkedOutBooks, System.out);
+        Library library = new Library(availableBooks, checkedOutBooks, System.out, availableMovies);
         HashMap<String, Command> commandMap = new HashMap<>();
         commandMap.put("1", new ListBooksCommand(library));
         commandMap.put("2", new CheckoutCommand(library, bufferedReader));

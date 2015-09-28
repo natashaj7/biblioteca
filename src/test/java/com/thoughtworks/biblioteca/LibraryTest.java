@@ -18,21 +18,26 @@ public class LibraryTest {
     private Library library;
     private Book book1;
     private Book book2;
+    private Movie movie1;
     private ArrayList<Book> availableBooks;
     private PrintStream printStream;
     private ArrayList <Book> checkedOutBooks;
+    private ArrayList<Movie> availableMovies;
 
     @Before
     public void setUp(){
         book1 = mock(Book.class);
         book2 = mock(Book.class);
+        movie1 = mock(Movie.class);
         availableBooks = new ArrayList<>();
         checkedOutBooks= new ArrayList<>();
+        availableMovies = new ArrayList<>();
         availableBooks.add(book1);
         checkedOutBooks.add(book2);
+        availableMovies.add(movie1);
 
         printStream = mock(PrintStream.class);
-        library = new Library(availableBooks, checkedOutBooks, printStream);
+        library = new Library(availableBooks, checkedOutBooks, printStream, availableMovies);
 
     }
     @Test
@@ -40,6 +45,12 @@ public class LibraryTest {
         library.showBooks();
 
         verify(book1).bookOutput();
+    }
+
+    @Test
+    public void shouldCallToStringFromMoviesClass(){
+        library.showMovies();
+        verify(movie1).movieOutput();
     }
 
     @Test
@@ -120,4 +131,12 @@ public class LibraryTest {
 
         verify(printStream).println("That is not a valid book to return.");
     }
+
+    @Test
+    public void shouldListDetailsOfAllMoviesWhenShowingMovies() {
+        library.showMovies();
+
+        verify(movie1).movieOutput();
+    }
+
 }

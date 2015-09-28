@@ -20,6 +20,7 @@ public class MainMenuTest {
     private final String LIST_BOOKS = "1";
     private final String CHECKOUT = "2";
     private final String RETURN = "3";
+    private final String LIST_MOVIES = "4";
     private MainMenu mainMenu;
     private PrintStream printStream;
     private Library library;
@@ -28,6 +29,7 @@ public class MainMenuTest {
     private ListBooksCommand listBooksCommand;
     private CheckoutCommand checkoutCommand;
     private ReturnBookCommand returnBookCommand;
+    private ListMoviesCommand listMoviesCommand;
 
 
     @Before
@@ -38,10 +40,12 @@ public class MainMenuTest {
         listBooksCommand = mock(ListBooksCommand.class);
         checkoutCommand = mock(CheckoutCommand.class);
         returnBookCommand = mock(ReturnBookCommand.class);
+        listMoviesCommand = mock(ListMoviesCommand.class);
         commandMap = new HashMap<>();
         commandMap.put("1", listBooksCommand);
         commandMap.put("2", checkoutCommand);
         commandMap.put("3", returnBookCommand);
+        commandMap.put("4", listMoviesCommand);
 
         mainMenu = new MainMenu(printStream, library, reader, commandMap);
 
@@ -95,5 +99,12 @@ public class MainMenuTest {
         mainMenu.selectOption();
 
         verify(commandMap.get("3")).execute();
+    }
+
+    @Test
+    public void shouldListMoviesWhenUserEntersFour(){
+        when(reader.readLine()).thenReturn(LIST_MOVIES, QUIT);
+        mainMenu.selectOption();
+        verify(commandMap.get("4")).execute();
     }
 }

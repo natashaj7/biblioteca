@@ -8,11 +8,13 @@ public class Library {
     private ArrayList<Book> availableBooks;
     private ArrayList<Book> checkedOutBooks;
     private PrintStream printStream;
+    private ArrayList<Movie> availableMovies;
 
-    public Library(ArrayList<Book> availableBooks, ArrayList<Book> checkedOutBooks, PrintStream printStream){
+    public Library(ArrayList<Book> availableBooks, ArrayList<Book> checkedOutBooks, PrintStream printStream, ArrayList<Movie> availableMovies){
         this.availableBooks = availableBooks;
         this.checkedOutBooks=checkedOutBooks;
         this.printStream = printStream;
+        this.availableMovies = availableMovies;
     }
 
     public void showBooks() {
@@ -56,5 +58,14 @@ public class Library {
         if(!bookExists){
             printStream.println("That is not a valid book to return.");
         }
+    }
+
+    public void showMovies() {
+        String movieList = "";
+        for(Movie item: availableMovies){
+            movieList+=(item.movieOutput() + "\n");
+        }
+        printStream.println(movieList);
+
     }
 }
